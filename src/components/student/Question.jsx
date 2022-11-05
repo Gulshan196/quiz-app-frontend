@@ -1,13 +1,17 @@
+import { buildQueries } from '@testing-library/react';
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const Question = () => {
     const [ques, setQues] = useState({});
+    const [blue, setBlue] = useState(false);
     const [options, setOptions] = useState([]);
     const [score, setScore] = useState(0);
     const [answer, setAnswer] = useState();
     const difficulty = useRef(5);
     const questionCount = useRef(1);
+    const navigate = useNavigate();
 
     async function fetchQuestions() {
         await axios('http://localhost:5000/questions', {
@@ -26,22 +30,22 @@ export const Question = () => {
 
     function getAnswer() {
         if (questionCount.current >= 10) {
-            alert('done',score)
-            return;
+            return navigate('/score', { state: score });
+
         }
         else {
             if (ques.correct === answer) {
                 if (difficulty.current === 10) {
-                    alert('done',score)
-                    return;
+                    return navigate('/score', { state: score });
+
                 }
                 setScore(score + 5);
                 difficulty.current = difficulty.current + 1;
             }
             else {
                 if (difficulty.current === 1) {
-                    alert('done',score)
-                    return;
+                    return navigate('/score', { state: score });
+
                 }
                 setScore(score - 2);
                 difficulty.current = difficulty.current - 1;
@@ -59,12 +63,18 @@ export const Question = () => {
     //     return false;
 
     // }
+    // function changeColor() {
+    //     setBlue((blue) => {
+    //         return !blue
+    //     })
+    // }
+    // let btn_class = blue ? "text-primary" : "";
+
     async function getQuestion() {
 
         // to make sure that the randomly generated question is of given difficulty
         while (true) {
             let questions = JSON.parse(localStorage.getItem('questions'));
-            console.log(questions);
             let i = questions[Math.floor(Math.random() * questions.length)];
             // to make sure that the randomly generated question is of given difficulty
             if (i.difficulty === difficulty.current) {
@@ -86,26 +96,22 @@ export const Question = () => {
                 <div className="card-body">
                     <h5 className="card-title">{ques.title}</h5>
 
-                    <div className="form-check">1.
-                        <label onClick={(e) => setAnswer(e.target.innerHTML)} className="form-check-label" htmlFor="flexRadioDefault2">
-                            {options[0]}
-                        </label>
+                    <div className="form-check">
+                        <input type="radio" name="address" onClick={(e) => setAnswer(e.target.value)} value={options[0]} />
+                        <span>  {options[0]}</span>
                     </div>
 
-                    <div className="form-check">2.
-                        <label onClick={(e) => setAnswer(e.target.innerHTML)} className="form-check-label" htmlFor="flexRadioDefault2">
-                            {options[1]}
-                        </label>
+                    <div className="form-check">
+                        <input type="radio" name="address" onClick={(e) => setAnswer(e.target.value)} value={options[1]} />
+                        <span>  {options[1]}</span>
                     </div>
-                    <div className="form-check">3.
-                        <label onClick={(e) => setAnswer(e.target.innerHTML)} className="form-check-label" htmlFor="flexRadioDefault2">
-                            {options[2]}
-                        </label>
+                    <div className="form-check">
+                        <input type="radio" name="address" onClick={(e) => setAnswer(e.target.value)} value={options[2]} />
+                        <span>  {options[2]}</span>
                     </div>
-                    <div className="form-check">4.
-                        <label onClick={(e) => setAnswer(e.target.innerHTML)} className="form-check-label" htmlFor="flexRadioDefault2">
-                            {options[3]}
-                        </label>
+                    <div className="form-check">
+                        <input type="radio" name="address" onClick={(e) => setAnswer(e.target.value)} value={options[3]} />
+                        <span>  {options[3]}</span>
                     </div>
                     <button onClick={handleClick} className="btn btn-primary">Submit</button>
                 </div>
