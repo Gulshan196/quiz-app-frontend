@@ -32,7 +32,7 @@ export const Login = ({ setToken }) => {
         setToken(token);
         if (token) {
             console.log('token', token);
-            navigate('/profile')
+            navigate('/')
         }
         else {
             alert('unauthorized access');
@@ -89,7 +89,7 @@ return (
             </div>
             <button type="submit" className="btn btn-primary">Sign in</button>
             <span> OR</span>
-            <Link to='/' className="btn btn-outline-primary ms-2">Sign up</Link>
+            <Link to='/' className="btn btn-outline-primary ms-2">Create new Account</Link>
         </form>
     </div>
 )

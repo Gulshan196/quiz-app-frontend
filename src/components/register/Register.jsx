@@ -24,7 +24,7 @@ export const Register = ({setToken}) => {
         }
     }
     return (
-        <div>  <form>
+        <div>  <form onSubmit={handleSubmit}>
             <div className="row mb-3">
                 <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Username</label>
                 <div className="col-sm-10">
@@ -44,8 +44,8 @@ export const Register = ({setToken}) => {
                 </div>
             </div>
     
-            <button type="submit" onClick={handleSubmit} className="btn btn-primary" >Sign Up</button>
-            <Link to='/login' className="btn btn-outline-primary ms-2">Sign in</Link>
+            <button type="submit" className="btn btn-primary" >Sign Up</button>
+            <Link to='/login' className="btn btn-outline-primary ms-2">Already a User</Link>
         </form></div>
     )
 }

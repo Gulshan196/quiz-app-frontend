@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-export const Score = () => {
+export const Score = ({setToken}) => {
     const location = useLocation();
     const navigate= useNavigate();
 
@@ -11,6 +11,7 @@ export const Score = () => {
                 <div className="card-body">
                     <h1> Your Total Score : {location.state}</h1>
                     <h5 className='col-2'><button className='btn btn-primary' onClick={() => {
+                        setToken(null);
                         localStorage.clear();
                         navigate('/login');
                     }}>Logout</button></h5>

@@ -16,11 +16,11 @@ function App() {
       <div className="App container-fluid">
         <Navbar />
         <Routes>
-          <Route path='/' element={token == null?<CardRegister />:<Profile/>} />
+          <Route path='/' element={token == null?<CardRegister />:<Profile setToken={setToken}/>} />
           <Route path='/login' element={<Card setToken={setToken} />} />
           <Route path='/admin' element={token == null ?<CardRegister />:<Panel />} />
-          <Route path='/profile' element ={token == null?<CardRegister />:<Profile/>}/>
-          <Route path='/score' element={<Score />} />
+          <Route path='/profile' element ={token == null?<CardRegister />:<Profile setToken={setToken}/>}/>
+          <Route path='/score' element={<Score setToken={setToken} />} />
         </Routes>
         
       </div>

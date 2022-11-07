@@ -1,11 +1,10 @@
-import { buildQueries } from '@testing-library/react';
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export const Question = () => {
+
     const [ques, setQues] = useState({});
-    const [blue, setBlue] = useState(false);
     const [options, setOptions] = useState([]);
     const [score, setScore] = useState(0);
     const [answer, setAnswer] = useState();
@@ -13,6 +12,12 @@ export const Question = () => {
     const questionCount = useRef(1);
     const navigate = useNavigate();
 
+    const ref1 = useRef();
+    const ref2 = useRef();
+    const ref3 = useRef();
+    const ref4 = useRef();
+
+    let filterArr = [];
     async function fetchQuestions() {
         await axios('http://localhost:5000/questions', {
             method: "get",
@@ -20,32 +25,30 @@ export const Question = () => {
         }).then((res) => {
             localStorage.setItem('questions', JSON.stringify([...res.data]));
         })
-
         getQuestion();
     }
     function handleClick() {
         getAnswer();
-
     }
 
     function getAnswer() {
-        if (questionCount.current >= 10) {
+        if (questionCount.current === 10) {
+            // alert('done',score)
             return navigate('/score', { state: score });
-
         }
         else {
             if (ques.correct === answer) {
                 if (difficulty.current === 10) {
-                    return navigate('/score', { state: score });
-
+                    // setScore(score + 5);
+                    return navigate('/score', { state: score + 5 });
                 }
                 setScore(score + 5);
                 difficulty.current = difficulty.current + 1;
             }
             else {
                 if (difficulty.current === 1) {
-                    return navigate('/score', { state: score });
-
+                    // setScore(score - 2);
+                    return navigate('/score', { state: score - 2 });
                 }
                 setScore(score - 2);
                 difficulty.current = difficulty.current - 1;
@@ -56,64 +59,79 @@ export const Question = () => {
 
     }
 
-    // function endExam() {
-    //     if (questionCount.current === 10 || difficulty.current === 0 || difficulty.current === 11) {
-    //         return true;
-    //     }
-    //     return false;
-
-    // }
-    // function changeColor() {
-    //     setBlue((blue) => {
-    //         return !blue
-    //     })
-    // }
-    // let btn_class = blue ? "text-primary" : "";
-
     async function getQuestion() {
-
         // to make sure that the randomly generated question is of given difficulty
-        while (true) {
-            let questions = JSON.parse(localStorage.getItem('questions'));
-            let i = questions[Math.floor(Math.random() * questions.length)];
-            // to make sure that the randomly generated question is of given difficulty
-            if (i.difficulty === difficulty.current) {
-                setQues(i);
-                setOptions(i.options);
-                return;
-            }
-        }
+        let questions = JSON.parse(localStorage.getItem('questions'));
+        console.log(questions);
+        filterArr = questions.filter((e) => e.difficulty === difficulty.current);
+        let i = filterArr[Math.floor(Math.random() * filterArr.length)];
+        // to make sure that the randomly generated question is of given difficulty
+        setQues(i);
+        setOptions(i.options);
+    }
 
+    let colorArr = [
+        ref1,
+        ref2,
+        ref3,
+        ref4
+    ]
+    const onAnswerSelect = async (e) => {
+        colorArr.forEach((e) => {
+            e.current.style.color = 'black'
+        });
+        e.target.style.color = 'blue';
+        console.log(e.target.innerHTML);
     }
 
     useEffect(() => {
+        console.log('update');
+        ref1.current.style.color = 'black';
+        ref2.current.style.color = 'black';
+        ref3.current.style.color = 'black';
+        ref4.current.style.color = 'black';
+    }, [questionCount.current])
+
+    useEffect(() => {
         fetchQuestions();
+        console.log('mount');
     }, [])
+
     return (
         <div className='row align-items-center justify-content-center mt-5 mb-5'>
             <div className="card" style={{ width: '60rem' }}>
-                <h5 className="card-header">Q. No. {questionCount.current} difficulty {ques.difficulty} score {score}</h5>
-                <div className="card-body">
+                <div className="card-header row justify-content-between">
+                    <h5 className='col-2' >Q. No. {questionCount.current}</h5>
+                    <h5 className='col-3'>Difficulty level : {ques.difficulty}</h5>
+                </div>
+
+                <div className="card-body"  >
                     <h5 className="card-title">{ques.title}</h5>
-
-                    <div className="form-check">
-                        <input type="radio" name="address" onClick={(e) => setAnswer(e.target.value)} value={options[0]} />
-                        <span>  {options[0]}</span>
+                    <div className="form-check">1.
+                        <span ref={ref1} style={{ color: 'black' }} onClick={(e) => {
+                            setAnswer(e.target.innerHTML);
+                           return onAnswerSelect(e);
+                        }}>{options[0]}</span>
                     </div>
-
-                    <div className="form-check">
-                        <input type="radio" name="address" onClick={(e) => setAnswer(e.target.value)} value={options[1]} />
-                        <span>  {options[1]}</span>
+                    <div className="form-check">2.
+                        <span ref={ref2} style={{ color: 'black' }} onClick={(e) => {
+                            setAnswer(e.target.innerHTML);
+                           return onAnswerSelect(e);
+                        }}>{options[1]}</span>
                     </div>
-                    <div className="form-check">
-                        <input type="radio" name="address" onClick={(e) => setAnswer(e.target.value)} value={options[2]} />
-                        <span>  {options[2]}</span>
+                    <div className="form-check">3.
+                        <span ref={ref3} style={{ color: 'black' }} onClick={(e) =>  {
+                            setAnswer(e.target.innerHTML);
+                           return onAnswerSelect(e);
+                        }}>{options[2]}</span>
                     </div>
-                    <div className="form-check">
-                        <input type="radio" name="address" onClick={(e) => setAnswer(e.target.value)} value={options[3]} />
-                        <span>  {options[3]}</span>
+                    <div className="form-check">4.
+                        <span ref={ref4} style={{ color: 'black' }} onClick={(e) =>  {
+                            setAnswer(e.target.innerHTML);
+                           return onAnswerSelect(e);
+                        }}>{options[3]}</span>
                     </div>
-                    <button onClick={handleClick} className="btn btn-primary">Submit</button>
+                    <button onClick={handleClick} className="btn btn-primary mt-2">Submit</button>
                 </div>
             </div>
         </div>

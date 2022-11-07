@@ -3,13 +3,14 @@ import React, {  useState,useEffect,useRef } from 'react'
 import { json, useLocation, useNavigate } from 'react-router-dom';
 import { Question } from './Question'
 
-export const Profile = () => {
+export const Profile = ({setToken}) => {
     const navigate = useNavigate();
     const [name, setName] = useState();
     const count = useRef(1);
     // const location = useLocation();
 
     let token = JSON.parse(localStorage.getItem('token'));
+    const [userName,setUserName] =  useState();
 
     async function fetchData() {
         await axios('http://localhost:5000/profile', {
@@ -21,13 +22,19 @@ export const Profile = () => {
         }).catch((err)=>{
             console.log(err);
         })
+
+        setUser();
     }
 
        useEffect(()=>{
         fetchData();
        },[])
+
+
+       function setUser(){
+        setUserName(JSON.parse(localStorage.getItem('user')));
+       }
        
-      const userName = JSON.parse(localStorage.getItem('user'));
 
     return (
         <>
@@ -38,6 +45,7 @@ export const Profile = () => {
                             <div className="row mt-3 justify-content-between">
                                 <h5 className='col-2' >Student Name : {userName}</h5>
                                 <h5 className='col-2'><button className='btn btn-outline-primary' onClick={() => {
+                                    setToken(null);
                                    localStorage.clear(); 
                                    navigate('/login');                                       
                                 }}>Logout</button></h5>
