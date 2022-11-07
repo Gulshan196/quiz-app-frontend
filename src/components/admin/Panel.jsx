@@ -18,7 +18,7 @@ export const Panel = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios('http://localhost:5000/questions', {
+        await axios('https://quiz-app-gulshan.herokuapp.com/questions', {
             method: "post",
             data: JSON.stringify({
                 title: title,

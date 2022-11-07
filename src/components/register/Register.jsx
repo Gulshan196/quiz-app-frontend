@@ -13,7 +13,7 @@ export const Register = ({setToken}) => {
             return alert('password and confirm password does not match');
         }
         else {
-            await axios('http://localhost:5000/user/signup', {
+            await axios('https://quiz-app-gulshan.herokuapp.com/user/signup', {
                 method: "post",
                 data: JSON.stringify({ username, password }),
                 headers: { "Content-Type": "application/json" }

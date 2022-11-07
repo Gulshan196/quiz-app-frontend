@@ -13,7 +13,7 @@ export const Profile = ({setToken}) => {
     const [userName,setUserName] =  useState();
 
     async function fetchData() {
-        await axios('http://localhost:5000/profile', {
+        await axios('https://quiz-app-gulshan.herokuapp.com/profile', {
             method: "get",
             headers: { "Authorization": "Bearer " +token } ,
         }).then((res)=>{

@@ -18,7 +18,7 @@ export const Login = ({ setToken }) => {
         }
     }
     const studentLogin = async () => {
-        let url = 'http://localhost:5000/auth/user/login';
+        let url = 'https://quiz-app-gulshan.herokuapp.com/auth/user/login';
         await axios(url, {
             method: "post",
             data: JSON.stringify({ username, password }),
@@ -40,7 +40,7 @@ export const Login = ({ setToken }) => {
     }
 
     const adminLogin = async () => {
-        let url = 'http://localhost:5000/auth/admin/login';
+        let url = 'https://quiz-app-gulshan.herokuapp.com/auth/admin/login';
         await axios(url, {
             method: "post",
             data: JSON.stringify({ username, password }),
