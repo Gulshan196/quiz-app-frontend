@@ -18,7 +18,6 @@ const Chart = () => {
       .style("background", "#d3d3d3")
       .style("margin-top", "50")
       .style('overflow','visible')
-      .style('padding',"100")
 
     //Setting the scale
     const xScale = d3
