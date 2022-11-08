@@ -34,7 +34,7 @@ export const Question = () => {
      const scorelist = () => {
         let temp_array = JSON.parse(localStorage.getItem('scoreBoard') || '[]');
         temp_array.push(score + 5);
-        localStorage.setItem('scoreData', JSON.stringify(temp_array));
+        localStorage.setItem('scoreBoard', JSON.stringify(temp_array));
     }
     function getAnswer() {
         if (questionCount.current == 10) {
