@@ -32,7 +32,7 @@ export const Question = () => {
     }
 
      const scorelist = () => {
-        let temp_array = JSON.parse(localStorage.getItem('scoreData') || '[]');
+        let temp_array = JSON.parse(localStorage.getItem('scoreBoard') || '[]');
         temp_array.push(score + 5);
         localStorage.setItem('scoreData', JSON.stringify(temp_array));
     }
