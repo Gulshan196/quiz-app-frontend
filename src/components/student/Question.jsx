@@ -45,21 +45,24 @@ export const Question = () => {
                     localStorage.setItem('scoreBoard',JSON.stringify(questionArray));
                     return navigate('/score', { state: score + 5 });
                 }
+                setScore(score + 5);
                 let questionArray = JSON.parse(localStorage.getItem('scoreBoard') || '[]');
                 questionArray.push(score);
                 localStorage.setItem('scoreBoard',JSON.stringify(questionArray));
-                setScore(score + 5);
                 difficulty.current = difficulty.current + 1;
             }
             else {
                 if (difficulty.current === 1) {
                     // setScore(score - 2);
                     let questionArray = JSON.parse(localStorage.getItem('scoreBoard') || '[]');
-                    questionArray.push(score+5);
+                    questionArray.push(score-2);
                     localStorage.setItem('scoreBoard',JSON.stringify(questionArray));
                     return navigate('/score', { state: score - 2 });
                 }
                 setScore(score - 2);
+                let questionArray = JSON.parse(localStorage.getItem('scoreBoard') || '[]');
+                questionArray.push(score);
+                localStorage.setItem('scoreBoard',JSON.stringify(questionArray));
                 difficulty.current = difficulty.current - 1;
             }
             getQuestion();
