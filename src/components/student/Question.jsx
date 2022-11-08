@@ -108,42 +108,47 @@ export const Question = () => {
     }, [])
 
     return (
-        <div className='row align-items-center justify-content-center mt-5 mb-5'>
+
+        <div className='row row-sm-auto align-items-center justify-content-center mt-5 mb-5'>
+
             <div className="card" style={{ width: '60rem' }}>
                 <div className="card-header row justify-content-between">
-                    <h5 className='col-2' >Q. No. {questionCount.current}</h5>
-                    <h5 className='col-3'>Difficulty level : {ques.difficulty}</h5>
+                    <h5 className='col-sm-auto col-md-4' >Q. No. {questionCount.current}</h5>
+                    <h5 className='col-sm-auto col-md-4'>Difficulty level : {ques.difficulty}</h5>
                 </div>
 
                 <div className="card-body"  >
                     <h5 className="card-title">{ques.title}</h5>
-                    <div className="form-check">1.
+                    <div className="form-check">a. &nbsp;
                         <span ref={ref1} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
-                           return onAnswerSelect(e);
+                            return onAnswerSelect(e);
                         }}>{options[0]}</span>
                     </div>
-                    <div className="form-check">2.
+                    <div className="form-check">b. &nbsp;
                         <span ref={ref2} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
-                           return onAnswerSelect(e);
+                            return onAnswerSelect(e);
                         }}>{options[1]}</span>
                     </div>
-                    <div className="form-check">3.
-                        <span ref={ref3} style={{ color: 'black' }} onClick={(e) =>  {
+                    <div className="form-check">c. &nbsp;
+                        <span ref={ref3} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
-                           return onAnswerSelect(e);
+                            return onAnswerSelect(e);
                         }}>{options[2]}</span>
                     </div>
-                    <div className="form-check">4.
-                        <span ref={ref4} style={{ color: 'black' }} onClick={(e) =>  {
+                    <div className="form-check">d. &nbsp;
+                        <span ref={ref4} style={{ color: 'black' }} onClick={(e) => {
                             setAnswer(e.target.innerHTML);
-                           return onAnswerSelect(e);
+                            return onAnswerSelect(e);
                         }}>{options[3]}</span>
                     </div>
                     <button onClick={handleClick} className="btn btn-primary mt-2">Submit</button>
                 </div>
             </div>
+
         </div>
+
+
     )
 }
