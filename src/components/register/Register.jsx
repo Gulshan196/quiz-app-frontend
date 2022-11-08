@@ -11,12 +11,11 @@ export const Register = ({setToken}) => {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        setLoading(true);
         if (password !== confirmPassword) {
              alert('password and confirm password does not match');
-             setLoading(false);
         }
         else {
+            setLoading(true);
             await axios('https://quiz-app-gulshan.herokuapp.com/user/signup', {
                 method: "post",
                 data: JSON.stringify({ username, password }),
