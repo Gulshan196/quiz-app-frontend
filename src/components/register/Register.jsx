@@ -1,14 +1,17 @@
 import axios from 'axios';
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
 
 export const Register = ({setToken}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
+    const [loading,setLoading] = useState(false);
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setLoading(true);
         if (password !== confirmPassword) {
             return alert('password and confirm password does not match');
         }
@@ -19,12 +22,24 @@ export const Register = ({setToken}) => {
                 headers: { "Content-Type": "application/json" }
             }).then((res)=>{
                 console.log(res.data);
+                setLoading(false);
                 alert('registered successfully');
             })
         }
     }
+
+    const Loading = () =>{
+        return (
+            <div><Spinner animation="border" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </Spinner></div>
+        )
+    }
+
     return (
-        <div>  <form onSubmit={handleSubmit}>
+        <div>  
+            {loading === true ? <Loading/> :
+            <form onSubmit={handleSubmit}>
             <div className="row mb-3">
                 <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Username</label>
                 <div className="col-sm-10">
@@ -46,6 +61,7 @@ export const Register = ({setToken}) => {
     
             <button type="submit" className="btn btn-primary" >Sign Up</button>
             <Link to='/login' className="btn btn-outline-primary ms-2">Already a User</Link>
-        </form></div>
+        </form>
+}</div>
     )
 }

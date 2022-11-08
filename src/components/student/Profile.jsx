@@ -47,7 +47,7 @@ export const Profile = ({setToken}) => {
                                 <h5 className='col-2'><button className='btn btn-outline-primary' onClick={() => {
                                     setToken(null);
                                    localStorage.clear(); 
-                                   navigate('/login');                                       
+                                   navigate('/');                                       
                                 }}>Logout</button></h5>
                             </div>
                         </h5>
