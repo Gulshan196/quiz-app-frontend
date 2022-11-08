@@ -31,38 +31,36 @@ export const Question = () => {
         getAnswer();
     }
 
+     const scorelist = () => {
+        let temp_array = JSON.parse(localStorage.getItem('scoreData') || '[]');
+        temp_array.push(score + 5);
+        localStorage.setItem('scoreData', JSON.stringify(temp_array));
+    }
     function getAnswer() {
-        if (questionCount.current === 10) {
+        if (questionCount.current == 10) {
             // alert('done',score)
             return navigate('/score', { state: score });
         }
         else {
-            if (ques.correct === answer) {
+ if (ques.correct === answer) {
                 if (difficulty.current === 10) {
+                    scorelist();
                     // setScore(score + 5);
-                    let questionArray = JSON.parse(localStorage.getItem('scoreBoard') || '[]');
-                    questionArray.push(score+5);
-                    localStorage.setItem('scoreBoard',JSON.stringify(questionArray));
                     return navigate('/score', { state: score + 5 });
                 }
                 setScore(score + 5);
-                let questionArray = JSON.parse(localStorage.getItem('scoreBoard') || '[]');
-                questionArray.push(score);
-                localStorage.setItem('scoreBoard',JSON.stringify(questionArray));
+                scorelist();
                 difficulty.current = difficulty.current + 1;
             }
             else {
                 if (difficulty.current === 1) {
+                    scorelist();
                     // setScore(score - 2);
-                    let questionArray = JSON.parse(localStorage.getItem('scoreBoard') || '[]');
-                    questionArray.push(score-2);
-                    localStorage.setItem('scoreBoard',JSON.stringify(questionArray));
                     return navigate('/score', { state: score - 2 });
                 }
+
                 setScore(score - 2);
-                let questionArray = JSON.parse(localStorage.getItem('scoreBoard') || '[]');
-                questionArray.push(score);
-                localStorage.setItem('scoreBoard',JSON.stringify(questionArray));
+                scorelist();
                 difficulty.current = difficulty.current - 1;
             }
             getQuestion();
