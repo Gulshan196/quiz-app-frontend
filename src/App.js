@@ -8,6 +8,7 @@ import { Profile } from './components/student/Profile';
 import {useState} from 'react'
 import { Panel } from './components/admin/Panel';
 import { Score } from './components/student/Score';
+import Chart from './components/student/Chart';
 
 function App() {
  const [token,setToken] = useState(JSON.parse(localStorage.getItem('token')));
@@ -21,6 +22,7 @@ function App() {
           <Route path='/admin' element={token == null ?<CardRegister />:<Panel />} />
           <Route path='/profile' element ={token == null?<CardRegister />:<Profile setToken={setToken}/>}/>
           <Route path='/score' element={<Score setToken={setToken} />} />
+          <Route path='/chart' element={<Chart />} />
         </Routes>
         
       </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Chart from './Chart';
 
 export const Score = ({setToken}) => {
     const location = useLocation();
@@ -10,6 +11,7 @@ export const Score = ({setToken}) => {
             <div className="card col-4">
                 <div className="card-body">
                     <h1> Your Total Score : {location.state}</h1>
+                    <Chart />
                     <h5 className='col-2'><button className='btn btn-primary' onClick={() => {
                         setToken(null);
                         localStorage.clear();

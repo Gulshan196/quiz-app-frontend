@@ -59,7 +59,7 @@ export const Login = ({ setToken }) => {
         })
         let token = JSON.parse(localStorage.getItem('token'));
         setToken(token);
-        setLoading.current = false;
+        setLoading(false);
         if (token) {
             console.log('token', token);
             navigate('/admin')
