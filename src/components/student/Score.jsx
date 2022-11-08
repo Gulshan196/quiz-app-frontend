@@ -16,7 +16,7 @@ export const Score = ({setToken}) => {
                     </div>
                     <div className='col-xm-auto'>
                         <div className='row'>
-                            <h5 className='col-sm-12'><button className='btn btn-dark' onClick={() => {
+                            <h5 className='col-sm-12'><button className='btn btn-primary' onClick={() => {
                                 setToken(null);
                                 localStorage.clear();
                                 navigate('/');
