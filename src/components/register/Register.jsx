@@ -13,7 +13,8 @@ export const Register = ({setToken}) => {
         e.preventDefault()
         setLoading(true);
         if (password !== confirmPassword) {
-            return alert('password and confirm password does not match');
+             alert('password and confirm password does not match');
+             setLoading(false);
         }
         else {
             await axios('https://quiz-app-gulshan.herokuapp.com/user/signup', {
