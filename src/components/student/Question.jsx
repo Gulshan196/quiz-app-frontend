@@ -19,7 +19,7 @@ export const Question = () => {
 
     let filterArr = [];
     async function fetchQuestions() {
-        await axios('https://quiz-app-gulshan.herokuapp.com/questions', {
+        await axios('https://quiz-app-six-iota.vercel.app/questions', {
             method: "get",
             headers: { "Content-Type": "application/json" }
         }).then((res) => {

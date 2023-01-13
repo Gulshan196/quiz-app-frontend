@@ -16,7 +16,7 @@ export const Register = ({setToken}) => {
         }
         else {
             setLoading(true);
-            await axios('https://quiz-app-gulshan.herokuapp.com/user/signup', {
+            await axios('https://quiz-app-six-iota.vercel.app/user/signup', {
                 method: "post",
                 data: JSON.stringify({ username, password }),
                 headers: { "Content-Type": "application/json" }

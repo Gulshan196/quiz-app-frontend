@@ -23,7 +23,7 @@ export const Login = ({ setToken }) => {
     }
     const studentLogin = async () => {
         setLoading(true);
-        let url = 'https://quiz-app-gulshan.herokuapp.com/auth/user/login';
+        let url = 'https://quiz-app-six-iota.vercel.app/auth/user/login';
         await axios(url, {
             method: "post",
             data: JSON.stringify({ username, password }),
@@ -47,7 +47,7 @@ export const Login = ({ setToken }) => {
 
     const adminLogin = async () => {
         setLoading(true);
-        let url = 'https://quiz-app-gulshan.herokuapp.com/auth/admin/login';
+        let url = 'https://quiz-app-six-iota.vercel.app/auth/admin/login';
         await axios(url, {
             method: "post",
             data: JSON.stringify({ username, password }),

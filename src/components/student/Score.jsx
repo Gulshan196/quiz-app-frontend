@@ -23,7 +23,6 @@ export const Score = ({setToken}) => {
                             }}>Logout</button></h5>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@ export const Profile = ({ setToken }) => {
     let token = JSON.parse(localStorage.getItem('token'));
 
     async function fetchData() {
-        let url = 'https://quiz-app-gulshan.herokuapp.com/profile';
+        let url = 'https://quiz-app-six-iota.vercel.app/profile';
         await axios(url, {
             method: "get",
             headers: { "Authorization": "Bearer " + token },
